@@ -1,0 +1,141 @@
+@import '../../assets/scss/main.scss';
+
+.fixedNavBar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 9999;
+	width: 100%;
+}
+
+.nav {
+	background-color: var(--block-bg-color);
+	box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.05);
+
+	&Wrapper {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		width: 100%;
+		padding: 4px 0;
+
+		&__burger {
+			display: none;
+		}
+
+		&__list {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			column-gap: 30px;
+
+			&Item {
+				a {
+					font-weight: 500;
+					font-size: 14px;
+					color: var(--text-placeholder);
+					transition: all 0.2s ease-in-out;
+
+					&.active {
+						color: var(--text-color);
+					}
+
+					&:hover {
+						color: var(--text-color);
+					}
+				}
+			}
+		}
+
+		&__account {
+			position: relative;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			column-gap: 16px;
+			padding: 6px 16px;
+			transition: all 0.2s ease-in-out;
+			border-radius: 10px;
+			cursor: pointer;
+			user-select: none;
+
+			&:hover {
+				background-color: var(--input-color);
+			}
+
+			&Name {
+				font-weight: 500;
+				font-size: 14px;
+				color: var(--text-placeholder);
+			}
+
+			&Avatar {
+				min-width: 40px;
+				max-width: 40px;
+				min-height: 40px;
+				max-height: 40px;
+				border-radius: 50%;
+			}
+
+			&Select {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				transition: all 0.2s ease-in-out;
+
+				svg {
+					min-width: 24px;
+					max-width: 24px;
+					min-height: 25px;
+					max-height: 25px;
+					path {
+						stroke: var(--text-placeholder);
+					}
+				}
+
+				&_open {
+					transform: rotate(-180deg) !important;
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 768px) {
+	.nav {
+		&Wrapper {
+			&__burger {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+
+				cursor: pointer;
+
+				svg {
+					min-width: 30px;
+					max-width: 30px;
+					min-height: 30px;
+					max-height: 30px;
+
+					path {
+						fill: var(--text-color);
+					}
+				}
+			}
+
+			&__list {
+				display: none;
+			}
+
+			&__account {
+				column-gap: 6px;
+				padding: 6px 10px;
+
+				&Name {
+					display: none;
+				}
+			}
+		}
+	}
+}

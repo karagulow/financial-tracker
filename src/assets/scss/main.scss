@@ -8,3 +8,25 @@ html {
 	font-weight: 400;
 	font-style: normal;
 }
+
+body {
+	-webkit-text-size-adjust: 100%;
+}
+
+.main {
+	margin-top: 90px;
+}
+
+.container {
+	margin: 0 auto;
+	max-width: 1080px;
+	padding: 0 20px;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+	select:focus,
+	textarea:focus,
+	input:focus {
+		font-size: 14px;
+	}
+}
