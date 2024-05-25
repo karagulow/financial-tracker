@@ -87,6 +87,10 @@
 					font-weight: 400;
 					font-size: 14px;
 					color: var(--text-placeholder);
+
+					&_selected {
+						color: var(--text-color) !important;
+					}
 				}
 
 				&__icon {
@@ -110,17 +114,22 @@
 			&Item {
 				padding: 0px 16px;
 
-				width: 100%;
 				height: 40px;
 				background-color: var(--input-color);
 				border-radius: 12px;
 
+				text-align-last: left;
 				font-weight: 400;
 				font-size: 14px;
 				color: var(--text-color);
 
 				&::placeholder {
 					color: var(--text-placeholder);
+				}
+
+				&[type='datetime-local'] {
+					-webkit-appearance: none;
+					width: 100%;
 				}
 			}
 
@@ -146,6 +155,13 @@
 					color: var(--text-placeholder);
 				}
 			}
+		}
+
+		&__error {
+			font-weight: 500;
+			font-size: 14px;
+			text-align: center;
+			color: var(--red-color);
 		}
 
 		&__submit {
