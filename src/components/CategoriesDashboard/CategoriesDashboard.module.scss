@@ -1,0 +1,145 @@
+@import '../../assets/scss/main.scss';
+
+.income {
+	color: var(--green-color) !important;
+}
+
+.expenses {
+	color: var(--red-color) !important;
+}
+
+.dashboard {
+	display: flex;
+	flex-direction: column;
+	row-gap: 20px;
+	padding: 20px 30px 30px 30px;
+
+	width: 100%;
+	height: fit-content;
+	background-color: var(--block-bg-color);
+	border-radius: 20px;
+
+	&Header {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+
+		&__title {
+			font-family: var(--second-family);
+			font-weight: 500;
+			font-size: 28px;
+			color: var(--text-color);
+		}
+
+		&__add_btn {
+			font-weight: 500;
+			font-size: 16px;
+			color: var(--accent-color-text);
+			transition: all 0.2s ease-in-out;
+
+			&:hover {
+				opacity: 0.7;
+			}
+		}
+	}
+
+	&Categories {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		grid-gap: 10px;
+
+		&__item {
+			display: flex;
+			flex-direction: row;
+			column-gap: 14px;
+			padding: 15px;
+
+			border: 1px solid var(--input-color);
+			border-radius: 16px;
+			height: auto;
+
+			&Icon {
+				min-width: 40px;
+				max-width: 40px;
+				min-height: 40px;
+				max-height: 40px;
+				border-radius: 50%;
+			}
+
+			&Values {
+				display: flex;
+				flex-direction: column;
+				row-gap: 4px;
+
+				&__count {
+					font-weight: 600;
+					font-size: 20px;
+				}
+
+				&__name {
+					font-weight: 400;
+					font-size: 14px;
+					color: var(--text-placeholder);
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 1000px) {
+	.dashboard {
+		&Categories {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+}
+
+@media (max-width: 800px) {
+	.dashboard {
+		&Categories {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+}
+
+@media (max-width: 700px) {
+	.dashboard {
+		padding: 14px;
+		row-gap: 10px;
+
+		&Header {
+			&__title {
+				font-size: 20px;
+			}
+		}
+	}
+}
+
+@media (max-width: 540px) {
+	.dashboard {
+		&Header {
+			&__add_btn {
+				font-size: 14px;
+			}
+		}
+
+		&Categories {
+			grid-template-columns: repeat(1, 1fr);
+		}
+	}
+}
+
+@media (max-width: 500px) {
+	.dashboard {
+		&Categories {
+			&__item {
+				&Values {
+					&__count {
+						font-size: 16px;
+					}
+				}
+			}
+		}
+	}
+}
