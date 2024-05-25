@@ -1,0 +1,164 @@
+@import '../../assets/scss/main.scss';
+
+.activeBtn {
+	background-color: var(--accent-color);
+	color: var(--text-color);
+}
+
+.inactiveBtn {
+	background-color: var(--input-color);
+	color: var(--accent-color-text);
+}
+
+.add {
+	position: fixed;
+	top: 0;
+	left: 0;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	width: 100%;
+	height: 100%;
+	backdrop-filter: blur(10px);
+	background-color: rgba(0, 0, 0, 0.2);
+	z-index: 10;
+
+	&Block {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		row-gap: 30px;
+		padding: 20px;
+		margin: 0 20px;
+
+		width: 500px;
+		height: fit-content;
+		border-radius: 20px;
+		background-color: var(--block-bg-color);
+
+		&__title {
+			font-family: var(--second-family);
+			font-weight: 500;
+			font-size: 24px;
+			text-align: center;
+			color: var(--text-color);
+		}
+
+		&__types {
+			display: flex;
+			flex-direction: row;
+			column-gap: 10px;
+			width: 100%;
+
+			&Btn {
+				border-radius: 12px;
+				width: 100%;
+				height: 40px;
+
+				font-weight: 500;
+				font-size: 14px;
+				text-align: center;
+			}
+		}
+
+		&__inputs {
+			display: flex;
+			flex-direction: column;
+			row-gap: 10px;
+			width: 100%;
+
+			&Select {
+				position: relative;
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				align-items: center;
+				padding: 0px 16px;
+
+				width: 100%;
+				height: 40px;
+				background-color: var(--input-color);
+				border-radius: 12px;
+				cursor: pointer;
+
+				&__text {
+					font-weight: 400;
+					font-size: 14px;
+					color: var(--text-placeholder);
+				}
+
+				&__icon {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					transition: all 0.2s ease-in-out;
+
+					&_open {
+						transform: rotate(-180deg);
+					}
+
+					svg {
+						path {
+							stroke: var(--text-placeholder);
+						}
+					}
+				}
+			}
+
+			&Item {
+				padding: 0px 16px;
+
+				width: 100%;
+				height: 40px;
+				background-color: var(--input-color);
+				border-radius: 12px;
+
+				font-weight: 400;
+				font-size: 14px;
+				color: var(--text-color);
+
+				&::placeholder {
+					color: var(--text-placeholder);
+				}
+			}
+
+			&Textarea {
+				padding: 16px;
+
+				width: 100%;
+				height: 140px;
+
+				background-color: var(--input-color);
+				border-radius: 12px;
+				resize: none;
+
+				font-weight: 400;
+				font-size: 14px;
+				color: var(--text-color);
+
+				&:focus {
+					outline: none;
+				}
+
+				&::placeholder {
+					color: var(--text-placeholder);
+				}
+			}
+		}
+
+		&__submit {
+			width: 100%;
+			height: 40px;
+
+			border-radius: 12px;
+			background-color: var(--accent-color);
+
+			font-weight: 500;
+			font-size: 14px;
+			text-align: center;
+			color: var(--text-color);
+		}
+	}
+}

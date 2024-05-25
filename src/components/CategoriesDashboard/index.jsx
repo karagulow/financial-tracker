@@ -1,6 +1,18 @@
+import { useState } from 'react';
+
 import styles from './CategoriesDashboard.module.scss';
 
+import { AddTransaction } from '../AddTransaction';
+
 export const CategoriesDashboard = ({ transactionsType }) => {
+	const [addTransactionOpen, setAddTransactionOpen] = useState(false);
+	const [typeTransactionClick, setTypeTransactionClick] =
+		useState(transactionsType);
+
+	addTransactionOpen
+		? (document.body.style.overflow = 'hidden')
+		: (document.body.style.overflow = 'auto');
+
 	const dashboardName =
 		transactionsType === 'income'
 			? 'Доходы'
@@ -26,7 +38,14 @@ export const CategoriesDashboard = ({ transactionsType }) => {
 		<div className={styles.dashboard}>
 			<div className={styles.dashboardHeader}>
 				<h3 className={styles.dashboardHeader__title}>{dashboardName}</h3>
-				<button className={styles.dashboardHeader__add_btn}>Добавить</button>
+				<button
+					className={styles.dashboardHeader__add_btn}
+					onClick={() => {
+						setAddTransactionOpen(true);
+					}}
+				>
+					Добавить
+				</button>
 			</div>
 			<div className={styles.dashboardCategories}>
 				{[...Array(6)].map(() => (
@@ -49,6 +68,13 @@ export const CategoriesDashboard = ({ transactionsType }) => {
 					</div>
 				))}
 			</div>
+			{addTransactionOpen && (
+				<AddTransaction
+					typeTransactionClick={typeTransactionClick}
+					setTypeTransactionClick={setTypeTransactionClick}
+					setAddTransactionOpen={setAddTransactionOpen}
+				/>
+			)}
 		</div>
 	);
 };

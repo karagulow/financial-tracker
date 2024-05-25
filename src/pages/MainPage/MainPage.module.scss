@@ -5,3 +5,9 @@
 	flex-direction: column;
 	row-gap: 30px;
 }
+
+@media (max-width: 500px) {
+	.main {
+		row-gap: 20px;
+	}
+}

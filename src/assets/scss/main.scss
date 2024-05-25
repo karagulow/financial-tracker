@@ -23,10 +23,8 @@ body {
 	padding: 0 20px;
 }
 
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
-	select:focus,
-	textarea:focus,
-	input:focus {
-		font-size: 14px;
+@media (max-width: 500px) {
+	.main {
+		margin-top: 80px;
 	}
 }
