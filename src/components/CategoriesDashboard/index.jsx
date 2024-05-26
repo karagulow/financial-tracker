@@ -4,7 +4,7 @@ import styles from './CategoriesDashboard.module.scss';
 
 import { AddTransaction } from '../AddTransaction';
 
-export const CategoriesDashboard = ({ transactionsType }) => {
+export const CategoriesDashboard = ({ transactionsType, dataList }) => {
 	const [addTransactionOpen, setAddTransactionOpen] = useState(false);
 	const [typeTransactionClick, setTypeTransactionClick] =
 		useState(transactionsType);
@@ -48,8 +48,8 @@ export const CategoriesDashboard = ({ transactionsType }) => {
 				</button>
 			</div>
 			<div className={styles.dashboardCategories}>
-				{[...Array(6)].map(() => (
-					<div className={styles.dashboardCategories__item}>
+				{dataList.map((data, index) => (
+					<div className={styles.dashboardCategories__item} key={index}>
 						<img
 							className={styles.dashboardCategories__itemIcon}
 							src=''
@@ -59,10 +59,10 @@ export const CategoriesDashboard = ({ transactionsType }) => {
 							<h5
 								className={`${styles.dashboardCategories__itemValues__count} ${valueColor}`}
 							>
-								150 000 ₽
+								{data.amount.toLocaleString()} ₽
 							</h5>
 							<p className={styles.dashboardCategories__itemValues__name}>
-								Работа
+								{data.name}
 							</p>
 						</div>
 					</div>

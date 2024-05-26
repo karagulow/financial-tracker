@@ -33,8 +33,7 @@ export const Registration = () => {
 				full_name: fullName,
 			});
 			console.log(error);
-			// console.log(response.data.user.id);
-			// navigate('/');
+			navigate('/');
 		} catch (error) {
 			throw error;
 		}

@@ -1,10 +1,30 @@
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import styles from './MainDashboard.module.scss';
 
-export const MainDashboard = () => {
+const getCurrentMonthYear = () => {
+	const months = [
+		'Январь',
+		'Февраль',
+		'Март',
+		'Апрель',
+		'Май',
+		'Июнь',
+		'Июль',
+		'Август',
+		'Сентябрь',
+		'Октябрь',
+		'Ноябрь',
+		'Декабрь',
+	];
+	const date = new Date();
+	const month = months[date.getMonth()];
+	const year = date.getFullYear();
+	return `${month} ${year}`;
+};
+
+export const MainDashboard = ({ income, expense, balance }) => {
 	const [rates, setRates] = useState({ USD: 0, EUR: 0 });
 
 	useEffect(() => {
@@ -29,7 +49,9 @@ export const MainDashboard = () => {
 	return (
 		<div className={styles.dashboard}>
 			<div className={styles.dashboardHeader}>
-				<h1 className={styles.dashboardHeader__title}>Сентябрь 2024</h1>
+				<h1 className={styles.dashboardHeader__title}>
+					{getCurrentMonthYear()}
+				</h1>
 				<div className={styles.dashboardHeader__rates}>
 					<div className={styles.dashboardHeader__ratesItem}>
 						1 USD = {rates.USD} RUB
@@ -41,16 +63,22 @@ export const MainDashboard = () => {
 			</div>
 			<div className={styles.dashboardStat}>
 				<div className={styles.dashboardStat__item}>
-					<h4 className={styles.dashboardStat__itemValue}>367 990 ₽</h4>
+					<h4 className={styles.dashboardStat__itemValue}>
+						{income.toLocaleString()} ₽
+					</h4>
 					<p className={styles.dashboardStat__itemName}>Доход</p>
 				</div>
 				<div className={styles.dashboardStat__item}>
-					<h4 className={styles.dashboardStat__itemValue}>298 500 ₽</h4>
+					<h4 className={styles.dashboardStat__itemValue}>
+						{expense.toLocaleString()} ₽
+					</h4>
 					<p className={styles.dashboardStat__itemName}>Расход</p>
 				</div>
 				<div className={styles.dashboardStat__item}>
-					<h4 className={styles.dashboardStat__itemValue}>187 412 ₽</h4>
-					<p className={styles.dashboardStat__itemName}>Баланс</p>
+					<h4 className={styles.dashboardStat__itemValue}>
+						{balance.toLocaleString()} ₽
+					</h4>
+					<p className={styles.dashboardStat__itemName}>Сальдо</p>
 				</div>
 				<div className={styles.dashboardStat__item}>
 					<h4 className={styles.dashboardStat__itemValue}>50 000 ₽</h4>
