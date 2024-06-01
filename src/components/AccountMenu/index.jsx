@@ -4,7 +4,12 @@ import { useEffect, useRef } from 'react';
 import styles from './AccountMenu.module.scss';
 import { logout } from '../../redux/slices/authSlice';
 
-export const AccountMenu = ({ setAccMenuOpen, accMenuOpen, username }) => {
+export const AccountMenu = ({
+	setAccMenuOpen,
+	setSettingUpCategoriesOpen,
+	accMenuOpen,
+	username,
+}) => {
 	const dispatch = useDispatch();
 
 	const handleClickLogout = () => {
@@ -57,7 +62,10 @@ export const AccountMenu = ({ setAccMenuOpen, accMenuOpen, username }) => {
 				</div>
 				<p className={styles.account_menuItem__text}>Настройки</p>
 			</div>
-			<div className={styles.account_menuItem}>
+			<div
+				className={styles.account_menuItem}
+				onClick={() => setSettingUpCategoriesOpen(true)}
+			>
 				<div className={styles.account_menuItem__icon}>
 					<svg
 						width='30'
@@ -94,7 +102,7 @@ export const AccountMenu = ({ setAccMenuOpen, accMenuOpen, username }) => {
 				</div>
 				<p className={styles.account_menuItem__text}>Категории</p>
 			</div>
-			<div className={styles.account_menuItem}>
+			<div className={styles.account_menuItem} onClick={handleClickLogout}>
 				<div className={styles.account_menuItem__icon}>
 					<svg
 						width='30'
@@ -109,12 +117,7 @@ export const AccountMenu = ({ setAccMenuOpen, accMenuOpen, username }) => {
 						/>
 					</svg>
 				</div>
-				<p
-					className={styles.account_menuItem__text}
-					onClick={handleClickLogout}
-				>
-					Выйти
-				</p>
+				<p className={styles.account_menuItem__text}>Выйти</p>
 			</div>
 		</div>
 	);

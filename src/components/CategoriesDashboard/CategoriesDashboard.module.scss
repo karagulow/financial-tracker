@@ -60,11 +60,20 @@
 			height: auto;
 
 			&Icon {
+				display: flex;
+				justify-content: center;
+				align-items: center;
 				min-width: 40px;
 				max-width: 40px;
 				min-height: 40px;
 				max-height: 40px;
-				border-radius: 50%;
+				border-radius: 8px;
+				background-color: var(--input-color);
+
+				&__img {
+					width: 24px;
+					height: 24px;
+				}
 			}
 
 			&Values {

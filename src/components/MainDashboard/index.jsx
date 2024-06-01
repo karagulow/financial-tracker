@@ -81,8 +81,8 @@ export const MainDashboard = ({ income, expense, balance }) => {
 					<p className={styles.dashboardStat__itemName}>Сальдо</p>
 				</div>
 				<div className={styles.dashboardStat__item}>
-					<h4 className={styles.dashboardStat__itemValue}>50 000 ₽</h4>
-					<p className={styles.dashboardStat__itemName}>Долги</p>
+					<h4 className={styles.dashboardStat__itemValue}>0 ₽</h4>
+					<p className={styles.dashboardStat__itemName}>Текущий баланс</p>
 				</div>
 			</div>
 		</div>

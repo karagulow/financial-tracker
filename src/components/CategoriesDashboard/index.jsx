@@ -50,11 +50,12 @@ export const CategoriesDashboard = ({ transactionsType, dataList }) => {
 			<div className={styles.dashboardCategories}>
 				{dataList.map((data, index) => (
 					<div className={styles.dashboardCategories__item} key={index}>
-						<img
-							className={styles.dashboardCategories__itemIcon}
-							src=''
-							alt='category-icon'
-						/>
+						<div className={styles.dashboardCategories__itemIcon}>
+							<img
+								className={styles.dashboardCategories__itemIcon__img}
+								src={data.icon}
+							/>
+						</div>
 						<div className={styles.dashboardCategories__itemValues}>
 							<h5
 								className={`${styles.dashboardCategories__itemValues__count} ${valueColor}`}

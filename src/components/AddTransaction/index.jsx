@@ -172,7 +172,7 @@ export const AddTransaction = ({
 	};
 
 	const handleFormSubmit = async e => {
-		e.preventDefault();
+		// e.preventDefault();
 
 		if (!formData.transactionCategory || !formData.amount || !formData.date) {
 			setValidationErrors(

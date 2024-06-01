@@ -60,7 +60,7 @@ export const MainPage = () => {
 
 				const { data: categories, error: catError } = await supabase
 					.from('transaction_categories')
-					.select('id, name, transaction_type_id')
+					.select('id, name, transaction_type_id, icon')
 					.eq(
 						'user_id',
 						JSON.parse(localStorage.getItem('userState'))?.auth?.user?.id
@@ -90,7 +90,11 @@ export const MainPage = () => {
 					if (categoryItem) {
 						categoryItem.amount += transaction.amount;
 					} else {
-						acc.push({ name: categoryName, amount: transaction.amount });
+						acc.push({
+							name: categoryName,
+							amount: transaction.amount,
+							icon: category.icon,
+						});
 					}
 					return acc;
 				}, []);
@@ -104,7 +108,11 @@ export const MainPage = () => {
 					if (categoryItem) {
 						categoryItem.amount += transaction.amount;
 					} else {
-						acc.push({ name: categoryName, amount: transaction.amount });
+						acc.push({
+							name: categoryName,
+							amount: transaction.amount,
+							icon: category.icon,
+						});
 					}
 					return acc;
 				}, []);

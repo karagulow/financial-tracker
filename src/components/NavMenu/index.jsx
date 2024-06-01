@@ -5,11 +5,20 @@ import styles from './NavMenu.module.scss';
 import supabase from '../../config/supabaseConfig';
 
 import { AccountMenu } from '../AccountMenu';
+import { SettingUpCategories } from '../SettingUpCategories';
+import { CategoryCreate } from '../CategoryCreate';
+import { CategoryEdit } from '../CategoryEdit';
 
 const setActive = ({ isActive }) => (isActive ? styles.active : '');
 
 export const NavMenu = () => {
 	const [accMenuOpen, setAccMenuOpen] = useState(false);
+	const [settingUpCategoriesOpen, setSettingUpCategoriesOpen] = useState(false);
+	const [categoryCreateOpen, setCategoryCreateOpen] = useState(false);
+	const [categoryEditOpen, setCategoryEditOpen] = useState(false);
+
+	const [typeTransactionClick, setTypeTransactionClick] = useState('');
+	const [categoryEditId, setCategoryEditId] = useState('');
 
 	const userState = JSON.parse(localStorage.getItem('userState'));
 	const userId = userState?.auth?.user?.id || null;
@@ -46,6 +55,10 @@ export const NavMenu = () => {
 	useEffect(() => {
 		getUserData();
 	}, []);
+
+	settingUpCategoriesOpen && categoryCreateOpen && categoryEditOpen
+		? (document.body.style.overflow = 'hidden')
+		: (document.body.style.overflow = 'auto');
 
 	return (
 		<div className={`${styles.nav} ${styles.fixedNavBar}`}>
@@ -128,11 +141,35 @@ export const NavMenu = () => {
 						{accMenuOpen && (
 							<AccountMenu
 								setAccMenuOpen={setAccMenuOpen}
+								setSettingUpCategoriesOpen={setSettingUpCategoriesOpen}
 								accMenuOpen={accMenuOpen}
 								username={userData.name}
 							/>
 						)}
 					</div>
+					{settingUpCategoriesOpen && (
+						<SettingUpCategories
+							setSettingUpCategoriesOpen={setSettingUpCategoriesOpen}
+							setCategoryCreateOpen={setCategoryCreateOpen}
+							setCategoryEditOpen={setCategoryEditOpen}
+							setTypeTransactionClick={setTypeTransactionClick}
+							setCategoryEditId={setCategoryEditId}
+						/>
+					)}
+					{categoryCreateOpen && (
+						<CategoryCreate
+							setCategoryCreateOpen={setCategoryCreateOpen}
+							setSettingUpCategoriesOpen={setSettingUpCategoriesOpen}
+							typeTransactionClick={typeTransactionClick}
+						/>
+					)}
+					{categoryEditOpen && (
+						<CategoryEdit
+							setCategoryEditOpen={setCategoryEditOpen}
+							setSettingUpCategoriesOpen={setSettingUpCategoriesOpen}
+							categoryEditId={categoryEditId}
+						/>
+					)}
 				</div>
 			</div>
 		</div>
