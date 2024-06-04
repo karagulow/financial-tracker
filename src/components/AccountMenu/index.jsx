@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { useEffect, useRef } from 'react';
+import { CSSTransition } from 'react-transition-group';
 
 import styles from './AccountMenu.module.scss';
 import { logout } from '../../redux/slices/authSlice';

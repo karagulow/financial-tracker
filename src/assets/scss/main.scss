@@ -28,3 +28,21 @@ body {
 		margin-top: 80px;
 	}
 }
+
+.popup-block-enter {
+	opacity: 0;
+}
+
+.popup-block-enter-active {
+	opacity: 1;
+	transition: opacity 200ms, transform 200ms;
+}
+
+.popup-block-exit {
+	opacity: 1;
+}
+
+.popup-block-exit-active {
+	opacity: 0;
+	transition: opacity 200ms, transform 200ms;
+}

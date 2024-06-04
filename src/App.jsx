@@ -11,6 +11,7 @@ import { MainLayout } from './layouts/MainLayout';
 import { Login } from './pages/Login';
 import { Registration } from './pages/Registration';
 import { MainPage } from './pages/MainPage';
+import { Transactions } from './pages/Transactions';
 
 function App() {
 	const dispatch = useDispatch();
@@ -37,6 +38,7 @@ function App() {
 				element={user ? <MainLayout /> : <Navigate to='/login' />}
 			>
 				<Route path='' element={<MainPage />} />
+				<Route path='transactions' element={<Transactions />} />
 			</Route>
 		</Routes>
 	);

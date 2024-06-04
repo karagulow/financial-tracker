@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { CSSTransition } from 'react-transition-group';
 
 import styles from './CategoriesDashboard.module.scss';
 
@@ -69,13 +70,18 @@ export const CategoriesDashboard = ({ transactionsType, dataList }) => {
 					</div>
 				))}
 			</div>
-			{addTransactionOpen && (
+			<CSSTransition
+				in={addTransactionOpen}
+				timeout={300}
+				classNames='popup-block'
+				unmountOnExit
+			>
 				<AddTransaction
 					typeTransactionClick={typeTransactionClick}
 					setTypeTransactionClick={setTypeTransactionClick}
 					setAddTransactionOpen={setAddTransactionOpen}
 				/>
-			)}
+			</CSSTransition>
 		</div>
 	);
 };

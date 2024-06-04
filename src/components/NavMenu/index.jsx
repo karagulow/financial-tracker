@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { CSSTransition } from 'react-transition-group';
 
 import styles from './NavMenu.module.scss';
 import supabase from '../../config/supabaseConfig';
@@ -87,7 +88,7 @@ export const NavMenu = () => {
 					</div>
 					<ul className={styles.navWrapper__list}>
 						<li className={styles.navWrapper__listItem}>
-							<NavLink to='#' className={setActive}>
+							<NavLink to='/' className={setActive}>
 								Главная
 							</NavLink>
 						</li>
@@ -138,16 +139,26 @@ export const NavMenu = () => {
 								/>
 							</svg>
 						</div>
-						{accMenuOpen && (
+						<CSSTransition
+							in={accMenuOpen}
+							timeout={300}
+							classNames='popup-block'
+							unmountOnExit
+						>
 							<AccountMenu
 								setAccMenuOpen={setAccMenuOpen}
 								setSettingUpCategoriesOpen={setSettingUpCategoriesOpen}
 								accMenuOpen={accMenuOpen}
 								username={userData.name}
 							/>
-						)}
+						</CSSTransition>
 					</div>
-					{settingUpCategoriesOpen && (
+					<CSSTransition
+						in={settingUpCategoriesOpen}
+						timeout={300}
+						classNames='popup-block'
+						unmountOnExit
+					>
 						<SettingUpCategories
 							setSettingUpCategoriesOpen={setSettingUpCategoriesOpen}
 							setCategoryCreateOpen={setCategoryCreateOpen}
@@ -155,21 +166,31 @@ export const NavMenu = () => {
 							setTypeTransactionClick={setTypeTransactionClick}
 							setCategoryEditId={setCategoryEditId}
 						/>
-					)}
-					{categoryCreateOpen && (
+					</CSSTransition>
+					<CSSTransition
+						in={categoryCreateOpen}
+						timeout={300}
+						classNames='popup-block'
+						unmountOnExit
+					>
 						<CategoryCreate
 							setCategoryCreateOpen={setCategoryCreateOpen}
 							setSettingUpCategoriesOpen={setSettingUpCategoriesOpen}
 							typeTransactionClick={typeTransactionClick}
 						/>
-					)}
-					{categoryEditOpen && (
+					</CSSTransition>
+					<CSSTransition
+						in={categoryEditOpen}
+						timeout={300}
+						classNames='popup-block'
+						unmountOnExit
+					>
 						<CategoryEdit
 							setCategoryEditOpen={setCategoryEditOpen}
 							setSettingUpCategoriesOpen={setSettingUpCategoriesOpen}
 							categoryEditId={categoryEditId}
 						/>
-					)}
+					</CSSTransition>
 				</div>
 			</div>
 		</div>
