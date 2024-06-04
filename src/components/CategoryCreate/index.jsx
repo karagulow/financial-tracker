@@ -5,7 +5,6 @@ import styles from './CategoryCreate.module.scss';
 
 export const CategoryCreate = ({
 	setCategoryCreateOpen,
-	setSettingUpCategoriesOpen,
 	typeTransactionClick,
 }) => {
 	const createRef = useRef();
@@ -17,7 +16,6 @@ export const CategoryCreate = ({
 				!event.composedPath().includes(createBlockRef.current)
 			) {
 				setCategoryCreateOpen(false);
-				setSettingUpCategoriesOpen(true);
 			}
 		};
 
@@ -31,7 +29,6 @@ export const CategoryCreate = ({
 		const handleKeyPress = event => {
 			if (event.key === 'Escape') {
 				setCategoryCreateOpen(false);
-				setSettingUpCategoriesOpen(true);
 			}
 		};
 
@@ -132,7 +129,6 @@ export const CategoryCreate = ({
 
 				console.log('Категория успешно добавлена:', data);
 				setCategoryCreateOpen(false);
-				setSettingUpCategoriesOpen(true);
 			} catch (error) {
 				console.error('Ошибка при добавлении категории:', error.message);
 			}

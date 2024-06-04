@@ -3,11 +3,7 @@ import supabase from '../../config/supabaseConfig';
 
 import styles from './CategoryEdit.module.scss';
 
-export const CategoryEdit = ({
-	setCategoryEditOpen,
-	setSettingUpCategoriesOpen,
-	categoryEditId,
-}) => {
+export const CategoryEdit = ({ setCategoryEditOpen, categoryEditId }) => {
 	const editRef = useRef();
 	const editBlockRef = useRef();
 	useEffect(() => {
@@ -17,7 +13,6 @@ export const CategoryEdit = ({
 				!event.composedPath().includes(editBlockRef.current)
 			) {
 				setCategoryEditOpen(false);
-				setSettingUpCategoriesOpen(true);
 			}
 		};
 
@@ -31,7 +26,6 @@ export const CategoryEdit = ({
 		const handleKeyPress = event => {
 			if (event.key === 'Escape') {
 				setCategoryEditOpen(false);
-				setSettingUpCategoriesOpen(true);
 			}
 		};
 
@@ -68,7 +62,6 @@ export const CategoryEdit = ({
 			}
 
 			setCategoryEditOpen(false);
-			setSettingUpCategoriesOpen(true);
 		} catch (error) {
 			console.error(error);
 		}

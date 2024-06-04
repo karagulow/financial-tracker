@@ -165,32 +165,23 @@ export const NavMenu = () => {
 							setCategoryEditOpen={setCategoryEditOpen}
 							setTypeTransactionClick={setTypeTransactionClick}
 							setCategoryEditId={setCategoryEditId}
+							categoryCreateOpen={categoryCreateOpen}
+							categoryEditOpen={categoryEditOpen}
 						/>
 					</CSSTransition>
-					<CSSTransition
-						in={categoryCreateOpen}
-						timeout={300}
-						classNames='popup-block'
-						unmountOnExit
-					>
+					{categoryCreateOpen && (
 						<CategoryCreate
 							setCategoryCreateOpen={setCategoryCreateOpen}
-							setSettingUpCategoriesOpen={setSettingUpCategoriesOpen}
 							typeTransactionClick={typeTransactionClick}
 						/>
-					</CSSTransition>
-					<CSSTransition
-						in={categoryEditOpen}
-						timeout={300}
-						classNames='popup-block'
-						unmountOnExit
-					>
+					)}
+
+					{categoryEditOpen && (
 						<CategoryEdit
 							setCategoryEditOpen={setCategoryEditOpen}
-							setSettingUpCategoriesOpen={setSettingUpCategoriesOpen}
 							categoryEditId={categoryEditId}
 						/>
-					</CSSTransition>
+					)}
 				</div>
 			</div>
 		</div>

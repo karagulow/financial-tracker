@@ -9,6 +9,8 @@ export const SettingUpCategories = ({
 	setCategoryEditOpen,
 	setTypeTransactionClick,
 	setCategoryEditId,
+	categoryCreateOpen,
+	categoryEditOpen,
 }) => {
 	const categoriesRef = useRef();
 	const categoriesBlockRef = useRef();
@@ -81,7 +83,11 @@ export const SettingUpCategories = ({
 	}, []);
 
 	return (
-		<div className={styles.categories} ref={categoriesRef}>
+		<div
+			className={styles.categories}
+			ref={categoriesRef}
+			style={categoryCreateOpen || categoryEditOpen ? { opacity: '0' } : null}
+		>
 			<div className={styles.categoriesBlock} ref={categoriesBlockRef}>
 				<h3 className={styles.categoriesBlock__title}>
 					Редактировать категории
@@ -228,7 +234,6 @@ export const SettingUpCategories = ({
 						type='button'
 						onClick={() => {
 							setCategoryCreateOpen(true);
-							setSettingUpCategoriesOpen(false);
 							setTypeTransactionClick('income');
 						}}
 					>
@@ -239,7 +244,6 @@ export const SettingUpCategories = ({
 						type='button'
 						onClick={() => {
 							setCategoryCreateOpen(true);
-							setSettingUpCategoriesOpen(false);
 							setTypeTransactionClick('expenses');
 						}}
 					>

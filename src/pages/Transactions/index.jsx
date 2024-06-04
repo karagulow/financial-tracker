@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import useSWR from 'swr';
 import { CSSTransition } from 'react-transition-group';
 import supabase from '../../config/supabaseConfig';
@@ -6,53 +6,45 @@ import supabase from '../../config/supabaseConfig';
 import styles from './Transactions.module.scss';
 import { AddTransaction } from '../../components/AddTransaction';
 
+const pageSize = 15;
+
+const fetcher = async page => {
+	const userState = JSON.parse(localStorage.getItem('userState'));
+	const userId = userState?.auth?.user?.id;
+
+	if (!userId) {
+		console.error('User ID not found in localStorage');
+		return [];
+	}
+
+	console.log('Page:', page);
+	console.log('Range:', (page - 1) * pageSize, page * pageSize - 1);
+
+	const { data, error } = await supabase
+		.from('transactions')
+		.select('*, transaction_categories(icon, name)')
+		.eq('user_id', userId)
+		.order('date', { ascending: false })
+		.range((page - 1) * pageSize, page * pageSize - 1);
+
+	if (error) {
+		console.error('Error fetching operations:', error);
+		throw new Error(error.message);
+	}
+
+	console.log('Fetched data:', data);
+	return data || [];
+};
+
 export const Transactions = () => {
 	const [typeTransactionClick, setTypeTransactionClick] = useState('income');
 	const [addTransactionOpen, setAddTransactionOpen] = useState(false);
-	const [allDataLoaded, setAllDataLoaded] = useState(false);
-
 	const [page, setPage] = useState(1);
+	const [allData, setAllData] = useState([]);
 
-	const fetcher = async page => {
-		const pageSize = 5;
-		const userState = JSON.parse(localStorage.getItem('userState'));
-		const userId = userState?.auth?.user?.id;
-
-		if (!userId) {
-			console.error('User ID not found in localStorage');
-			return {};
-		}
-
-		const { data, error } = await supabase
-			.from('transactions')
-			.select('*, transaction_categories(icon, name)')
-			.eq('user_id', userId)
-			.order('date', { ascending: false })
-			.range((page - 1) * pageSize, page * pageSize - 1);
-
-		if (error) {
-			console.error('Error fetching operations:', error);
-			throw new Error(error.message);
-		}
-
-		if (!data || data.length === 0) {
-			console.log('No data returned from Supabase');
-			return {};
-		}
-
-		const groupedData = data.reduce((acc, operation) => {
-			const date = new Date(operation.date).toISOString().split('T')[0];
-			if (!acc[date]) acc[date] = [];
-			acc[date].push(operation);
-			return acc;
-		}, {});
-
-		if (data.length < pageSize) {
-			setAllDataLoaded(true);
-		}
-
-		return groupedData;
-	};
+	useEffect(() => {
+		console.log('Current Page:', page);
+	}, [page]);
 
 	const { data, error, isValidating } = useSWR(
 		['transactions', page],
@@ -60,9 +52,24 @@ export const Transactions = () => {
 		{ revalidateOnFocus: false }
 	);
 
+	useEffect(() => {
+		if (data && data.length > 0) {
+			setAllData(prevData => [...prevData, ...data]);
+		}
+	}, [data]);
+
 	const loadMore = () => {
 		setPage(prevPage => prevPage + 1);
 	};
+
+	const allDataLoaded = data && data.length < pageSize;
+
+	const groupedData = allData.reduce((acc, operation) => {
+		const date = new Date(operation.date).toISOString().split('T')[0];
+		if (!acc[date]) acc[date] = [];
+		acc[date].push(operation);
+		return acc;
+	}, {});
 
 	addTransactionOpen
 		? (document.body.style.overflow = 'hidden')
@@ -101,14 +108,14 @@ export const Transactions = () => {
 				</button>
 			</div>
 			<div className={styles.mainContent}>
-				{data && Object.keys(data).length > 0 ? (
-					Object.keys(data).map(date => (
+				{Object.keys(groupedData).length > 0 ? (
+					Object.keys(groupedData).map(date => (
 						<div className={styles.mainContent__day} key={date}>
 							<h2 className={styles.mainContent__dayTitle}>
 								{new Date(date).toLocaleDateString()}
 							</h2>
 							<ul className={styles.mainContent__dayTransactions}>
-								{data[date].map(transaction => (
+								{groupedData[date].map(transaction => (
 									<li
 										className={styles.mainContent__dayTransactions__item}
 										key={transaction.id}
@@ -178,40 +185,24 @@ export const Transactions = () => {
 						</div>
 					))
 				) : (
-					<p className={styles.mainContent__not_found}>Операций нет</p>
+					<p className={styles.mainContent__not_found}>
+						Финансовые операции не найдены
+					</p>
 				)}
-			</div>
-			<div>
-				{error && <p>{error.message}</p>}
-				<div>
-					{data && Object.keys(data).length > 0 ? (
-						Object.keys(data).map(date => (
-							<div key={date}>
-								<h2>{new Date(date).toLocaleDateString()}</h2>
-								<ul>
-									{data[date].map(operation => (
-										<li key={operation.id}>
-											<strong>
-												{operation.amount} {operation.currency}
-											</strong>{' '}
-											- {operation.operation_type} <br />
-											{operation.description} <br />
-											<em>{new Date(operation.date).toLocaleString()}</em>
-										</li>
-									))}
-								</ul>
-							</div>
-						))
-					) : (
-						<p>No operations found</p>
-					)}
-				</div>
 				{!allDataLoaded && (
-					<div>
+					<div className={styles.mainContent__load_more}>
 						{isValidating ? (
-							<p>Loading...</p>
+							<p className={styles.mainContent__load_moreLoading}>
+								Загрузка...
+							</p>
 						) : (
-							<button onClick={loadMore}>Load More</button>
+							<button
+								className={styles.mainContent__load_moreBtn}
+								onClick={loadMore}
+								type='button'
+							>
+								Показать еще
+							</button>
 						)}
 					</div>
 				)}
