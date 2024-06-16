@@ -12,6 +12,7 @@ import { Login } from './pages/Login';
 import { Registration } from './pages/Registration';
 import { MainPage } from './pages/MainPage';
 import { Transactions } from './pages/Transactions';
+import { Analytics } from './pages/Analytics';
 
 function App() {
 	const dispatch = useDispatch();
@@ -39,6 +40,7 @@ function App() {
 			>
 				<Route path='' element={<MainPage />} />
 				<Route path='transactions' element={<Transactions />} />
+				<Route path='analytics' element={<Analytics />} />
 			</Route>
 		</Routes>
 	);

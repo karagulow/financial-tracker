@@ -1,0 +1,73 @@
+@import '../../assets/scss/main.scss';
+
+.block {
+	display: flex;
+	flex-direction: column;
+	row-gap: 20px;
+	padding: 20px 30px;
+
+	width: 100%;
+	height: fit-content;
+	background-color: var(--block-bg-color);
+	border-radius: 20px;
+
+	&Top {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+
+		&__title {
+			font-family: var(--second-family);
+			font-weight: 500;
+			font-size: 28px;
+			color: var(--text-color);
+		}
+
+		&__period {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			column-gap: 4px;
+			padding: 4px;
+
+			width: fit-content;
+			height: fit-content;
+			background-color: var(--input-color);
+			border-radius: 12px;
+
+			&Btn {
+				width: 70px;
+				height: 32px;
+
+				font-weight: 500;
+				font-size: 14px;
+				color: var(--text-color);
+				border-radius: 10px;
+
+				transition: all 0.2s ease-in-out;
+
+				&_active {
+					background-color: var(--accent-color);
+
+					font-weight: 500;
+					font-size: 14px;
+					color: var(--text-color);
+				}
+			}
+		}
+	}
+
+	&Line {
+		width: 100%;
+		border: 1px solid var(--input-color);
+	}
+
+	&Message {
+		font-weight: 400;
+		font-size: 16px;
+		text-align: center;
+		color: var(--text-color);
+		border-radius: 10px;
+	}
+}

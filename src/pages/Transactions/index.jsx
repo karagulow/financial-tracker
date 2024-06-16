@@ -17,9 +17,6 @@ const fetcher = async page => {
 		return [];
 	}
 
-	console.log('Page:', page);
-	console.log('Range:', (page - 1) * pageSize, page * pageSize - 1);
-
 	const { data, error } = await supabase
 		.from('transactions')
 		.select('*, transaction_categories(icon, name)')
@@ -32,7 +29,6 @@ const fetcher = async page => {
 		throw new Error(error.message);
 	}
 
-	console.log('Fetched data:', data);
 	return data || [];
 };
 
@@ -41,10 +37,6 @@ export const Transactions = () => {
 	const [addTransactionOpen, setAddTransactionOpen] = useState(false);
 	const [page, setPage] = useState(1);
 	const [allData, setAllData] = useState([]);
-
-	useEffect(() => {
-		console.log('Current Page:', page);
-	}, [page]);
 
 	const { data, error, isValidating } = useSWR(
 		['transactions', page],

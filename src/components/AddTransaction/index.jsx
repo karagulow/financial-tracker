@@ -146,7 +146,8 @@ export const AddTransaction = ({
 
 	const [validationErrors, setValidationErrors] = useState();
 
-	const addTransactionToDatabase = async () => {
+	const addTransactionToDatabase = async e => {
+		e.preventDefault();
 		try {
 			const { data, error } = await supabase.from('transactions').insert([
 				{
@@ -182,7 +183,7 @@ export const AddTransaction = ({
 		}
 
 		setValidationErrors();
-		await addTransactionToDatabase();
+		await addTransactionToDatabase(e);
 		setAddTransactionOpen(false);
 	};
 
